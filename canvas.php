@@ -20,7 +20,6 @@
 
 <script type="text/javascript">
   ////
-
    /* Variables de Configuracion */
    var idCanvas='canvas';
    var idForm='formCanvas';
@@ -29,7 +28,6 @@
    var colorDelTrazo='#555';
    var colorDeFondo='#fff';
    var grosorDelTrazo=2;
-
    /* Variables necesarias */
    var contexto=null;
    var valX=0;
@@ -39,24 +37,17 @@
    var anchoCanvas=document.getElementById(idCanvas).offsetWidth;
    var altoCanvas=document.getElementById(idCanvas).offsetHeight;
    var pizarraCanvas=document.getElementById(idCanvas);
-
    /* Esperamos el evento load */
    window.addEventListener('load',IniciarDibujo,false);
-
    function IniciarDibujo(){
-	   
-	/**poner imagen en canvas*/   
-      var micanvas=document.getElementById("canvas");
-      var ctx = micanvas.getContext("2d");
-
-  var miimagen=new Image();
-  miimagen.src="html5.png";
-
-  miimagen.onload=function(){
+	var micanvas=document.getElementById("canvas");
+	var ctx = micanvas.getContext("2d");
+	var miimagen=new Image();
+	miimagen.src="html5.png";
+	miimagen.onload=function(){
     ctx.drawImage(miimagen,0,0);
   }
-	/***/
-  /* Creamos la pizarra */
+     /* Creamos la pizarra */
      pizarraCanvas.style.cursor=estiloDelCursor;
      contexto=pizarraCanvas.getContext('2d');
      contexto.fillStyle=colorDeFondo;
@@ -69,25 +60,21 @@
      pizarraCanvas.addEventListener('mousedown',MouseDown,false);// Click pc
      pizarraCanvas.addEventListener('mouseup',MouseUp,false);// fin click pc
      pizarraCanvas.addEventListener('mousemove',MouseMove,false);// arrastrar pc
-
      pizarraCanvas.addEventListener('touchstart',TouchStart,false);// tocar pantalla tactil
      pizarraCanvas.addEventListener('touchmove',TouchMove,false);// arrastras pantalla tactil
      pizarraCanvas.addEventListener('touchend',TouchEnd,false);// fin tocar pantalla dentro de la pizarra
      pizarraCanvas.addEventListener('touchleave',TouchEnd,false);// fin tocar pantalla fuera de la pizarra
    }
-
    function MouseDown(e){
      flag=true;
      contexto.beginPath();
      valX=e.pageX-posicionX(pizarraCanvas); valY=e.pageY-posicionY(pizarraCanvas);
      contexto.moveTo(valX,valY);
    }
-
    function MouseUp(e){
      contexto.closePath();
      flag=false;
    }
-
    function MouseMove(e){
      if(flag){
        contexto.beginPath();
@@ -98,7 +85,6 @@
        contexto.stroke();
      }
    }
-
    function TouchMove(e){
      e.preventDefault();
      if (e.targetTouches.length == 1) { 
@@ -106,50 +92,35 @@
        MouseMove(touch);
      }
    }
-
    function TouchStart(e){
      if (e.targetTouches.length == 1) { 
        var touch = e.targetTouches[0]; 
        MouseDown(touch);
      }
    }
-
    function TouchEnd(e){
      if (e.targetTouches.length == 1) { 
        var touch = e.targetTouches[0]; 
        MouseUp(touch);
      }
    }
-
    function posicionY(obj) {
      var valor = obj.offsetTop;
      if (obj.offsetParent) valor += posicionY(obj.offsetParent);
      return valor;
    }
-
    function posicionX(obj) {
      var valor = obj.offsetLeft;
      if (obj.offsetParent) valor += posicionX(obj.offsetParent);
      return valor;
    }
-
    /* Limpiar pizarra */
    function LimpiarTrazado(){
      contexto=document.getElementById(idCanvas).getContext('2d');
      contexto.fillStyle=colorDeFondo;
      contexto.fillRect(0,0,anchoCanvas,altoCanvas);
-	     var micanvas=document.getElementById("canvas");
-      var ctx = micanvas.getContext("2d");
-
-  var miimagen=new Image();
-  miimagen.src="html5.png";
-
-  miimagen.onload=function(){
-    ctx.drawImage(miimagen,0,0);
-  }
-	
+	 IniciarDibujo();
    }
-
    /* Enviar el trazado */
    function GuardarTrazado(){
      imagen.value=document.getElementById(idCanvas).toDataURL('image/png');
@@ -161,10 +132,8 @@
 <?php 
 // comprovamos si se envió la imagen
 if (isset($_POST['imagen'])) { 
-
    // mostrar la imagen
    echo '<img src="'.$_POST['imagen'].'" border="1">';
-
    // funcion para gusrfdar la imagen base64 en el servidor
    // el nombre debe tener la extension
    function uploadImgBase64 ($base64, $name){
@@ -182,10 +151,9 @@ if (isset($_POST['imagen'])) {
            return true;
        }
    }
-
    // llamamos a la funcion uploadImgBase64( img_base64, nombre_fina.png) 
    uploadImgBase64($_POST['imagen'], 'mi_imagen_'.date('d_m_Y_H_i_s').'.png' );
 }
 ?>
 </body>
-</html>
+</html> 
