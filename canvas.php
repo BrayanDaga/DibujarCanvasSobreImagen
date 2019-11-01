@@ -44,6 +44,8 @@
    window.addEventListener('load',IniciarDibujo,false);
 
    function IniciarDibujo(){
+	   
+	/**poner imagen en canvas*/   
       var micanvas=document.getElementById("canvas");
       var ctx = micanvas.getContext("2d");
 
@@ -53,7 +55,8 @@
   miimagen.onload=function(){
     ctx.drawImage(miimagen,0,0);
   }
-     /* Creamos la pizarra */
+	/***/
+  /* Creamos la pizarra */
      pizarraCanvas.style.cursor=estiloDelCursor;
      contexto=pizarraCanvas.getContext('2d');
      contexto.fillStyle=colorDeFondo;
@@ -135,6 +138,16 @@
      contexto=document.getElementById(idCanvas).getContext('2d');
      contexto.fillStyle=colorDeFondo;
      contexto.fillRect(0,0,anchoCanvas,altoCanvas);
+	     var micanvas=document.getElementById("canvas");
+      var ctx = micanvas.getContext("2d");
+
+  var miimagen=new Image();
+  miimagen.src="html5.png";
+
+  miimagen.onload=function(){
+    ctx.drawImage(miimagen,0,0);
+  }
+	
    }
 
    /* Enviar el trazado */
